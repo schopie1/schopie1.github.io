@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Accessibility Review Comment Builder</title>
+  <style>
+    :root {
+      --bg: #f7f7f9;
+      --panel: #ffffff;
+      --text: #1f2937;
+      --muted: #4b5563;
+      --border: #d1d5db;
+      --accent: #174ea6;
+      --accent-light: #e8f0fe;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+      color: var(--text);
+      background: var(--bg);
+    }
+    header, main {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+    header h1 { margin-bottom: .25rem; }
+    header p { color: var(--muted); margin-top: 0; }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) minmax(320px, 1fr);
+      gap: 1.25rem;
+      align-items: start;
+    }
+    section, .output-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    }
+    h2 { margin-top: 0; font-size: 1.25rem; }
+    fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+    }
+    legend {
+      font-weight: bold;
+      font-size: 1.15rem;
+      margin-bottom: .5rem;
+    }
+    label {
+      display: block;
+      padding: .35rem 0;
+      cursor: pointer;
+    }
+    input[type="checkbox"] {
+      width: 1.1rem;
+      height: 1.1rem;
+      margin-right: .45rem;
+      vertical-align: middle;
+    }
+    textarea, input[type="text"] {
+      width: 100%;
+      box-sizing: border-box;
+      font: inherit;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .65rem;
+      margin-top: .35rem;
+    }
+    .output-card {
+      position: sticky;
+      top: 1rem;
+    }
+    #output {
+      min-height: 14rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      background: #fff;
+    }
+    #output h3 {
+      margin-bottom: .2rem;
+      padding-bottom: .2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    #output p { margin-top: .4rem; }
+    button {
+      background: var(--accent);
+      color: white;
+      border: 0;
+      border-radius: 8px;
+      padding: .65rem .9rem;
+      font: inherit;
+      cursor: pointer;
+      margin: .35rem .35rem .35rem 0;
+    }
+    button.secondary {
+      background: #374151;
+    }
+    .empty {
+      color: var(--muted);
+      font-style: italic;
+    }
+    .note {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      padding: .75rem;
+      border-radius: 8px;
+      color: var(--text);
+    }
+    @media (max-width: 850px) {
+      .layout { grid-template-columns: 1fr; }
+      .output-card { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Accessibility Review Comment Builder</h1>
+    <p>Select the issues that apply. The matching review language will appear in the generated comments panel.</p>
+  </header>
+
+  <main>
+    <section class="course-name-section">
+      <label for="courseName"><strong>Course name</strong></label>
+      <input id="courseName" type="text" placeholder="Enter course name…" />
+    </section>
+    <div class="layout">
+    <div>
+      <section>
+        <fieldset>
+          <legend>PDFs</legend>
+          <label><input type="checkbox" data-category="PDFs" data-key="pdf-ocr"> OCR needed</label>
+          <label><input type="checkbox" data-category="PDFs" data-key="pdf-tags"> Tags needed</label>
+          <label><input type="checkbox" data-category="PDFs" data-key="pdf-metadata"> Metadata needed</label>
+          <label><input type="checkbox" data-category="PDFs" data-key="pdf-alt-text"> Alt text or alternative text needed</label>
+          <label><input type="checkbox" data-category="PDFs" data-key="pdf-contrast"> Color contrast issues</label>
+          <label><input type="checkbox" data-category="PDFs" data-key="pdf-additional-work"> Needs additional work</label>
+        </fieldset>
+      </section>
+
+      <section>
+        <fieldset>
+          <legend>Slideshows</legend>
+          <label><input type="checkbox" data-category="Slideshows" data-key="slides-titles-missing"> Titles are missing</label>
+          <label><input type="checkbox" data-category="Slideshows" data-key="slides-title-structure"> Title structure needs assistance</label>
+          <label><input type="checkbox" data-category="Slideshows" data-key="slides-alt-text"> Alt text missing</label>
+          <label><input type="checkbox" data-category="Slideshows" data-key="slides-contrast"> Color contrast issues</label>
+        </fieldset>
+      </section>
+
+      <section>
+        <fieldset>
+          <legend>Word documents or word processors</legend>
+          <label><input type="checkbox" data-category="Word documents or word processors" data-key="word-headings"> Headings needed</label>
+          <label><input type="checkbox" data-category="Word documents or word processors" data-key="word-semantic-structure"> Semantic structure needed</label>
+          <label><input type="checkbox" data-category="Word documents or word processors" data-key="word-alt-text"> Alt text needed</label>
+          <label><input type="checkbox" data-category="Word documents or word processors" data-key="word-table-structure"> Table structure issues</label>
+          <label><input type="checkbox" data-category="Word documents or word processors" data-key="word-link-contrast"> Text or link contrast issues</label>
+        </fieldset>
+      </section>
+
+      <section>
+        <fieldset>
+          <legend>Images</legend>
+          <label><input type="checkbox" data-category="Images" data-key="image-alt-text"> Alt text needed for images</label>
+        </fieldset>
+      </section>
+
+      <section>
+        <fieldset>
+          <legend>Non-native documents</legend>
+          <label><input type="checkbox" data-category="Non-native documents" data-key="native-ppt-to-pdf"> PowerPoints turned into PDF</label>
+          <label><input type="checkbox" data-category="Non-native documents" data-key="native-word-to-pdf"> Word documents turned into PDF</label>
+          <label><input type="checkbox" data-category="Non-native documents" data-key="native-other"> Other</label>
+          <label for="otherDescription">Describe other non-native document issue:</label>
+          <input id="otherDescription" type="text" placeholder="Example: Publisher file exported to PDF, scanned handout, etc." />
+        </fieldset>
+      </section>
+
+      <section>
+        <fieldset>
+          <legend>Overall Comments</legend>
+          <label for="overallComments">Write any overall comments to the instructor here:</label>
+          <textarea id="overallComments" rows="6" placeholder="Enter your overall comments…" style="margin-top:.35rem;"></textarea>
+        </fieldset>
+      </section>
+    </div>
+
+    <aside class="output-card" aria-live="polite">
+      <h2>Generated comments</h2>
+      <p class="note">Use the buttons below to copy the generated text or download it as an HTML file.</p>
+      <div id="output"><p class="empty">No issues selected yet.</p></div>
+      <button type="button" id="copyText">Copy plain text</button>
+      <button type="button" id="downloadHtml" class="secondary">Download comments as HTML</button>
+      <button type="button" id="clearAll" class="secondary">Clear all</button>
+    </aside>
+    </div><!-- /.layout -->
+  </main>
+
+  <script>
+    const comments = {
+      "pdf-ocr": {
+        title: "OCR needed",
+        text: "There are PDF's in your course that need Optical Character Recognition, often called OCR. OCR converts scanned or image-based text into selectable, searchable text. This is important because screen readers, search tools, and many accessibility checkers cannot reliably interpret text that only exists as an image. To address PDF's in need of OCR: <ul><li>The best option is to check with the MSU Libraries to see if there is an electronic version of the document<li>If you have scanned the documents at copier you can rescan them using the OCR setting on a departmental copy machine <li>Alternatively, you can make use of OCR software such as Adobe Acrobat Pro, Abbyy Finereader, or if you are more technologically oriented there are several free, open-source options that can be installed and used<li><a href='https://webaccess.msu.edu/tutorials/documents' target='_blank'>Further information can be found on the MSU WebAccess website Document Tutorials</a></ul>"
+      },
+      "pdf-tags": {
+        title: "Tags needed",
+        text: "This PDF needs document tags. Tags provide the underlying structure that assistive technologies use to identify headings, paragraphs, lists, tables, links, and other document elements. Without tags, a screen reader may read content out of order or fail to communicate the purpose of important information. To address this, add or repair tags in the source document when possible, or use a PDF remediation tool such as Adobe Acrobat's accessibility tools to create and review the tag structure."
+      },
+      "pdf-metadata": {
+        title: "Metadata needed",
+        text: "This PDF needs complete and accurate metadata. Metadata such as the document title, author, subject, and language helps users identify the document and helps assistive technology present the document correctly. At minimum, the PDF should have a meaningful title and the correct document language set. This can usually be updated in the document properties or accessibility settings of the PDF editor."
+      },
+      "pdf-alt-text": {
+        title: "Alt text or alternative text needed",
+        text: "Images, charts, icons, and other meaningful visual elements in this PDF need alternative text. Alt text gives users who cannot see the image access to the same purpose or information. Decorative images can usually be marked as decorative or artifacts, while meaningful images should have concise, context-specific descriptions. For charts or complex images, include the key takeaway and provide surrounding text or a longer description when needed."
+      },
+      "pdf-contrast": {
+        title: "Color contrast issues",
+        text: "This PDF has color contrast issues that may make text or important visual information difficult to read. Sufficient contrast helps users with low vision, color vision differences, mobile users, and anyone viewing the document in poor lighting. Review text, links, charts, and graphics to make sure important information does not rely on color alone and that foreground and background colors have enough contrast."
+      },
+      "pdf-additional-work": {
+        title: "Needs additional work",
+        text: "This PDF needs additional accessibility review or remediation beyond the items listed above. Common areas to check include reading order, headings, lists, links, tables, form fields, bookmarks, document language, and whether the PDF was created from an accessible source file. When possible, correct accessibility issues in the original source document and then export a new accessible PDF."
+      },
+      "slides-titles-missing": {
+        title: "Titles are missing",
+        text: "One or more slides are missing slide titles. Slide titles help users understand where they are in a presentation and allow screen reader users to navigate from slide to slide more easily. Add a unique, descriptive title to each slide. If a visible title does not fit the design, use an off-slide or hidden title that remains available to assistive technology."
+      },
+      "slides-title-structure": {
+        title: "Title structure needs assistance",
+        text: "The title structure in this slideshow needs assistance. Slide titles should be consistent, descriptive, and placed in the correct title placeholder when possible. A clear title structure helps users navigate the deck and understand the relationship between slides. Review each slide layout and use built-in title placeholders rather than manually formatted text boxes whenever possible."
+      },
+      "slides-alt-text": {
+        title: "Alt text missing",
+        text: "Images, charts, icons, diagrams, and other meaningful visuals in this slideshow need alternative text. Alt text should describe the purpose or essential information of the visual in the context of the slide. Decorative images should be marked as decorative when the software allows it. Complex visuals may need a brief alt text summary plus additional explanation in the speaker notes or nearby slide text."
+      },
+      "slides-contrast": {
+        title: "Color contrast issues",
+        text: "This slideshow includes color contrast issues. Text, links, charts, and important visual elements should have enough contrast against the background to be readable. Avoid using color alone to communicate meaning, especially in graphs, status indicators, or highlighted text. Consider using darker text on lighter backgrounds or lighter text on darker backgrounds, and check contrast before sharing the final deck."
+      },
+      "word-headings": {
+        title: "Headings needed",
+        text: "This document needs proper headings. Headings create a navigable outline and help all readers understand how the document is organized. Screen reader users can jump between headings, but only when built-in heading styles are used. Apply heading styles in order, such as Heading 1 for the main title or major sections and Heading 2 or Heading 3 for subsections."
+      },
+      "word-semantic-structure": {
+        title: "Semantic structure needed",
+        text: "This document needs stronger semantic structure. Semantic structure means using built-in document features for headings, lists, links, tables, columns, and other elements instead of relying only on visual formatting. This helps assistive technologies communicate what each part of the document is and how the content is organized. Use the word processor's built-in styles and formatting tools rather than manually creating structure with spaces, tabs, bold text, or text boxes."
+      },
+      "word-alt-text": {
+        title: "Alt text needed",
+        text: "Images and other meaningful visual elements in this document need alternative text. Alt text should explain the purpose or key information of the image in context. Decorative images can be marked as decorative when appropriate. Charts, diagrams, and screenshots may need a concise summary plus additional explanation in the surrounding text."
+      },
+      "word-table-structure": {
+        title: "Table structure issues",
+        text: "This document has table structure issues. Tables should be used for data, not layout, and should include clear header rows or columns when needed. Avoid merged cells, split cells, blank rows or columns, and overly complex layouts when possible. Clear table structure helps screen reader users understand the relationship between each data cell and its headers."
+      },
+      "word-link-contrast": {
+        title: "Text or link contrast issues",
+        text: "This document has text or link contrast issues. Text and links need enough contrast against the background to be readable. Links should also be visually identifiable in a way that does not rely only on color, such as underlining or clear link styling. Review body text, headings, links, callout boxes, and any colored text to make sure the information is easy to perceive."
+      },
+      "image-alt-text": {
+        title: "Alt text needed for images",
+        text: "This image needs alternative text. Alt text should communicate the purpose, meaning, or essential information of the image for someone who cannot see it. A useful description is usually concise and context-specific. If the image is decorative and does not add information, it may be appropriate to mark it as decorative or leave the alt text empty, depending on the platform."
+      },
+      "native-ppt-to-pdf": {
+        title: "PowerPoints turned into PDF",
+        text: "This appears to be a PowerPoint presentation that was turned into a PDF. Accessibility is usually easiest to repair in the original PowerPoint file before exporting to PDF. Review the source presentation for slide titles, reading order, alt text, table structure, link text, and color contrast. After those items are corrected, export the file using the application's accessible PDF export option and then check the PDF."
+      },
+      "native-word-to-pdf": {
+        title: "Word documents turned into PDF",
+        text: "This appears to be a Word or word processor document that was turned into a PDF. Accessibility is usually best addressed in the original source document before conversion. Review the source file for headings, lists, table structure, alt text, meaningful link text, language settings, and color contrast. Then export to PDF using an accessible export option and confirm that tags, reading order, and metadata were preserved."
+      },
+      "native-other": {
+        title: "Other non-native document issue",
+        text: "This document appears to have been converted from another format or created in a way that may limit accessibility. When possible, locate the original source file and remediate accessibility issues there before exporting or converting the document. If the original file is not available, the converted file may need manual remediation, including review of text recognition, reading order, tags or structure, alt text, links, tables, and metadata."
+      }
+    };
+
+    const output = document.getElementById('output');
+    const otherDescription = document.getElementById('otherDescription');
+
+    function buildComments() {
+      const checked = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'));
+      if (checked.length === 0) {
+        output.innerHTML = '<p class="empty">No issues selected yet.</p>';
+        return;
+      }
+
+      const courseName = document.getElementById('courseName').value.trim();
+      const dateStamp = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+      let html = '';
+      if (courseName) {
+        html += `<p style="margin:0 0 .25rem;"><strong>Course:</strong> ${escapeHtml(courseName)}</p>`;
+      }
+      html += `<p style="margin:0 0 1rem; padding-bottom:.75rem; border-bottom:1px solid #d1d5db;"><strong>Date:</strong> ${dateStamp}</p>`;
+
+      const overallComments = document.getElementById('overallComments').value.trim();
+      if (overallComments) {
+        html += `<h3>Overall Comments</h3><p>${escapeHtml(overallComments).replace(/\n/g, '<br>')}</p>`;
+      }
+
+      const grouped = new Map();
+      checked.forEach(box => {
+        const category = box.dataset.category;
+        if (!grouped.has(category)) grouped.set(category, []);
+        grouped.get(category).push(box.dataset.key);
+      });
+
+      grouped.forEach((keys, category) => {
+        html += `<h3>${category}</h3>`;
+        keys.forEach(key => {
+          const item = comments[key];
+          let text = item.text;
+          if (key === 'native-other' && otherDescription.value.trim()) {
+            text += ` Description provided: ${escapeHtml(otherDescription.value.trim())}`;
+          }
+          html += `<h4>${item.title}</h4><p>${text}</p>`;
+        });
+      });
+      output.innerHTML = html;
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>'"]/g, char => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+      }[char]));
+    }
+
+    function getPlainText() {
+      return output.innerText.trim();
+    }
+
+    document.querySelectorAll('input[type="checkbox"]').forEach(box => {
+      box.addEventListener('change', buildComments);
+    });
+    otherDescription.addEventListener('input', buildComments);
+    document.getElementById('courseName').addEventListener('input', buildComments);
+    document.getElementById('overallComments').addEventListener('input', buildComments);
+
+    document.getElementById('copyText').addEventListener('click', async () => {
+      const text = getPlainText();
+      if (!text || text === 'No issues selected yet.') return;
+      await navigator.clipboard.writeText(text);
+      alert('Generated comments copied to clipboard.');
+    });
+
+    document.getElementById('downloadHtml').addEventListener('click', () => {
+      const content = output.innerHTML;
+      if (!content || content.includes('No issues selected yet.')) return;
+      const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Generated Accessibility Comments</title></head><body>${content}</body></html>`;
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'generated-accessibility-comments.html';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('clearAll').addEventListener('click', () => {
+      document.querySelectorAll('input[type="checkbox"]').forEach(box => box.checked = false);
+      otherDescription.value = '';
+      document.getElementById('overallComments').value = '';
+      buildComments();
+    });
+  </script>
+</body>
+</html>
