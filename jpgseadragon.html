@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Scan viewer</title>
+  <script src="https://cdn.jsdelivr.net/npm/openseadragon@4.1.0/build/openseadragon/openseadragon.min.js"></script>
+  <style>
+    #controls { padding: 8px; font-family: sans-serif; }
+    #viewer { width: 100%; height: 85vh; background: #222; }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <label>Brightness <input type="range" id="b" min="50" max="200" value="100"></label>
+    <label>Contrast <input type="range" id="c" min="50" max="250" value="100"></label>
+    <label><input type="checkbox" id="g"> Grayscale</label>
+    <button id="reset">Reset</button>
+  </div>
+  <div id="viewer"></div>
+
+  <script>
+    const viewer = OpenSeadragon({
+      id: "viewer",
+      prefixUrl: "https://cdn.jsdelivr.net/npm/openseadragon@4.1.0/build/openseadragon/images/",
+      tileSources: {
+        type: "image",
+        url: "1925_30Mar_letterfromCounteeCullenrereprints.jpg"
+      }
+    });
+
+    const b = document.getElementById("b"),
+          c = document.getElementById("c"),
+          g = document.getElementById("g");
+
+    const apply = () => {
+      viewer.canvas.style.filter =
+        `brightness(${b.value}%) contrast(${c.value}%)` +
+        (g.checked ? " grayscale(100%)" : "");
+    };
+
+    b.oninput = c.oninput = g.onchange = apply;
+    document.getElementById("reset").onclick = () => {
+      b.value = c.value = 100;
+      g.checked = false;
+      apply();
+    };
+  </script>
+</body>
+</html>
