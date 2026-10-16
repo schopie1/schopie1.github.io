@@ -1,0 +1,14 @@
+<label>Brightness <input type="range" id="b" min="50" max="200" value="100"></label>
+<label>Contrast <input type="range" id="c" min="50" max="250" value="100"></label>
+<button id="reset">Reset</button>
+<div style="overflow:auto; max-height:90vh">
+  <img id="scan" src="1925_30Mar_letterfromCounteeCullenrereprints.jpg" style="max-width:100%">
+</div>
+
+<script>
+  const img = document.getElementById('scan');
+  const b = document.getElementById('b'), c = document.getElementById('c');
+  const apply = () => img.style.filter = `brightness(${b.value}%) contrast(${c.value}%)`;
+  b.oninput = c.oninput = apply;
+  document.getElementById('reset').onclick = () => { b.value = c.value = 100; apply(); };
+</script>
