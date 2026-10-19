@@ -23,7 +23,7 @@
       <section>
         <fieldset>
           <legend>Most Common Issues</legend>
-          <p class="note">These are the most common accessibility issues found in courses. If you select any of these, the generated comments will include a description of the issue and recommendations for addressing it.</p>
+          <p class="note">These are the most common accessibility issues found in courses. If you are just doing a basic review for someone without any specific needs to showcase you might only need to use this section. The generated comments will include a description of the issue and basic recommendations for addressing it.</p>
           <label><input type="checkbox" data-category="Most Common Issues" data-key="common-pdf"> Inaccessible PDFs used for readings</label>
           <label><input type="checkbox" data-category="Most Common Issues" data-key="common-syllabus-pdf"> Syllabus as inaccessible PDF</label>
           <label><input type="checkbox" data-category="Most Common Issues" data-key="common-slides-pdf"> Slides converted to inaccessible PDF</label>
@@ -107,6 +107,31 @@
 
   <script>
     const comments = {
+      "common-pdf": {
+        title: "<h2>Inaccessible PDFs used for readings</h2>",
+        text: "The course includes PDFs that are not accessible. Inaccessible PDFs can create barriers for students who rely on screen readers or other assistive technologies. When possible, provide readings in an accessible format such as HTML or Word documents. <br /><br /> <b>What to do:</b> <br /> Do not use PDF unless absolutely necessary. Instead, use PDF alternatives such as an HTML document, EPUB file, or Word Document in place of PDF readings. If a PDF is necessary, you must ensure it is properly tagged, has a correct reading order, includes meaningful headings, and passes an accessibility check before being shared with students. <a href='https://example.com/get-more-help-with-pdf-readings' target='_blank'>Get more help with PDF Readings</a>"
+      },
+      "common-syllabus-pdf": {
+        title: "<h2>Syllabus as inaccessible PDF</h2>",
+        text: "The course syllabus appears to be provided as an inaccessible PDF. The syllabus is often the first document students encounter and needs to be fully accessible. When possible, provide the syllabus as a properly structured Word document or an accessible HTML page rather than a scanned or untagged PDF. If the syllabus must remain a PDF, it should be tagged, have a correct reading order, include meaningful headings, and pass an accessibility check before being shared with students."
+      },
+      "common-slides-pdf": {
+        title: "<h2>Slides converted to inaccessible PDF</h2>",
+        text: "Course slides appear to have been converted to PDF rather than shared in their original format or as an accessible alternative. Slides converted to PDF often lose important structure such as slide titles, reading order, and speaker notes. When possible, share the original presentation file or provide an accessible version that includes speaker notes or a text-based alternative. If a PDF version is required, export it using the accessible PDF option in the presentation software and verify that tags, reading order, and alt text are preserved."
+      },
+      "common-word-pdf": {
+        title: "Word documents converted to inaccessible PDF",
+        text: "Course documents appear to have been converted to PDF rather than shared in their original format or as an accessible alternative. Word documents converted to PDF often lose important structure such as headings, lists, tables, and alt text. When possible, share the original Word document or provide an accessible version that includes proper headings, lists, tables, and alt text. If a PDF version is required, export it using the accessible PDF option in Word and verify that tags, reading order, and alt text are preserved."
+      },
+        "common-wordslides-checker": {
+        title: "Word Documents or PowerPoint slides with accessibility issues",
+        text: "You have Word Documents or PowerPoint slides in the course that have accessibility issues. These issues may include missing headings, missing alt text for images, poor color contrast, or other structural problems. To address this, review each document using the built-in accessibility checker in Word or PowerPoint, and make necessary corrections to headings, alt text, links, tables, and color contrast before sharing with students. To use the built-in accessibility checker, go to the 'Review' tab in Word or PowerPoint and select 'Check Accessibility'. Follow the recommendations provided to improve accessibility. Note that the report from the accessibility checker often requires scrolling down to see all issues so be sure to review the entire report as issues may not be immediately visible."
+      },
+      "common-images": {
+        title: "Inaccessibile images in the course",
+        text: "You have images in your course that may not have appropriate descriptive or alternative text. Images should have descriptive alt text to ensure they are accessible to users who rely on screen readers. Review each image and provide concise, context-specific descriptions that convey the same information as the visual element. Additionally your images may lack sufficient color contrast, which can make them difficult to see for users with low vision or color vision deficiencies. Ensure that images have enough contrast between foreground and background colors to be easily distinguishable. If the image you are sharing is a historical document that is meant to be viewed as a visual artifact, consider providing a text-based description or transcript of the content to ensure accessibility for all users."
+      },
+     
       "pdf-ocr": {
         title: "OCR needed",
         text: "You have PDFs in the course which need optical character recognition, often called OCR. OCR converts scanned or image-based text into selectable, searchable text. This is important because screen readers, search tools, and many accessibility checkers cannot reliably interpret text that only exists as an image. To address this we recommend not using PDF if possible and instead using the original document (e.g. a Word or PowerPoint file) or converting the document you have into HTML and posting as a D2L file, or converting the document into a Word Document and running the accessibility checker tool in Word before uploading. If you have no other option than a PDF please consult with the CAL Accessibility Team for options."
@@ -186,14 +211,6 @@
       "native-other": {
         title: "Other non-native document issue",
         text: "This document appears to have been converted from another format or created in a way that may limit accessibility. When possible, locate the original source file and remediate accessibility issues there before exporting or converting the document. If the original file is not available, the converted file may need manual remediation, including review of text recognition, reading order, tags or structure, alt text, links, tables, and metadata."
-      },
-      "common-syllabus-pdf": {
-        title: "Syllabus as inaccessible PDF",
-        text: "The course syllabus appears to be provided as an inaccessible PDF. The syllabus is often the first document students encounter and needs to be fully accessible. When possible, provide the syllabus as a properly structured Word document or an accessible HTML page rather than a scanned or untagged PDF. If the syllabus must remain a PDF, it should be tagged, have a correct reading order, include meaningful headings, and pass an accessibility check before being shared with students."
-      },
-      "common-slides-pdf": {
-        title: "Slides converted to PDF",
-        text: "Course slides appear to have been converted to PDF rather than shared in their original format or as an accessible alternative. Slides converted to PDF often lose important structure such as slide titles, reading order, and speaker notes. When possible, share the original presentation file or provide an accessible version that includes speaker notes or a text-based alternative. If a PDF version is required, export it using the accessible PDF option in the presentation software and verify that tags, reading order, and alt text are preserved."
       }
     };
 
@@ -210,7 +227,7 @@
       const courseName = document.getElementById('courseName').value.trim();
       const dateStamp = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-      let html = '';
+      let html = '<h1>Course Accessibility Review Report</h1>';
       if (courseName) {
         html += `<p style="margin:0 0 .25rem;"><strong>Course:</strong> ${escapeHtml(courseName)}</p>`;
       }
@@ -218,7 +235,7 @@
 
       const overallComments = document.getElementById('overallComments').value.trim();
       if (overallComments) {
-        html += `<h3>Overall Comments</h3><p>${escapeHtml(overallComments).replace(/\n/g, '<br>')}</p>`;
+        html += `<h2>Overall Comments</h2><p>${escapeHtml(overallComments).replace(/\n/g, '<br>')}</p>`;
       }
 
       const grouped = new Map();
@@ -229,14 +246,14 @@
       });
 
       grouped.forEach((keys, category) => {
-        html += `<h3>${category}</h3>`;
+        html += `<h2>${category}</h2>`;
         keys.forEach(key => {
           const item = comments[key];
           let text = item.text;
           if (key === 'native-other' && otherDescription.value.trim()) {
             text += ` Description provided: ${escapeHtml(otherDescription.value.trim())}`;
           }
-          html += `<h4>${item.title}</h4><p>${text}</p>`;
+          html += `<h3>${item.title}</h3><p>${text}</p>`;
         });
       });
       output.innerHTML = html;
