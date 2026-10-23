@@ -1,8 +1,23 @@
 ---
 marp: true
 theme: default
+style: |
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    z-index: 100;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
 paginate: true
 ---
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 # IAH Accessibility Workshop
 **Scott Schopieray, Ph.D.**
@@ -10,8 +25,8 @@ schopie1@msu.edu
 10.23.2026
 
 ---
-
-# General Plan 
+<h1 id="main-content">
+General Plan </h1>
 How we are going to spend our time:
 
 **11:00-11:30** - The basics and overview of Big Issues
