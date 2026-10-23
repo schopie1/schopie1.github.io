@@ -5,16 +5,23 @@ paginate: true
 ---
 
 # IAH Accessibility Workshop
-How we are going to spend our day:
+**Scott Schopieray, Ph.D.**
+schopie1@msu.edu
+10.23.2026
 
-11:00-11:30 - The basics and overview of Big Issues
+---
+
+# General Plan 
+How we are going to spend our time:
+
+**11:00-11:30** - The basics and overview of Big Issues
 	The importance of course accessibility
 	Digital accessibility in the context of internal and federal deadlines
 
-11:30-12:00 - Live Review of IAH 221C
+**11:30-12:00** - Live Review of IAH 221C
 	Common course accessibility concerns and some simple solutions
 	
-12:00-12:30 - Wrap-Up, Questions, Ideas
+**12:00-12:30** - Wrap-Up, Questions, Ideas
 	Resources
 	Questions
 
@@ -175,18 +182,19 @@ _Video or Audio without accurate transcripts_
 - Provide a clean, downloadable text transcript for standalone audio files or pre-recorded video lectures, ideally starting from a prepared script whenever possible.
 
 --- 
-![bg right:40%](1925_30Mar_letterfromCounteeCullenrereprints.jpg)
-# On to the dunk tank!!!
+![bg right:40%](221c-slideimage.png)
+# Sample Course Review and Remediation
+- Using Garth's IAH 221C
 - [Course Review Email](https://docs.google.com/document/d/1hLXgVChQyWyoarMfZ6Oja-cUJzIn2V5QaYhW8TwKKZo/edit?usp=sharing)
 - [MSU D2L](https://d2l.msu.edu/)
 
 --- 
 # Tools We'll be Using
 - Spartan Ally - This is built into D2L and can help to identify issues and rectify some of them
+- [Course Inventory Tool | D2L Help | Michigan State University](https://help.d2l.msu.edu/msu-docs/course-inventory-tool)
 - Microsoft Word and PowerPoint - To work with content files
 - Abbyy Finereader ($) - To do high-quality OCR and check for accuracy
 - Adobe Acrobat Pro ($) - To create tags and check reading order
-- [Course Inventory Tool | D2L Help | Michigan State University](https://help.d2l.msu.edu/msu-docs/course-inventory-tool)
 
 
 <small> _Abbyy Finereader is about $75 per year and Adobe Acrobat Pro is about $250 per year (it comes with Adobe Creative Cloud). There is no good alternative tool to Adobe Acrobat Pro for tagging PDFs that we have found and unfortunately Adobe's licensing model no longer allows for perpetual licensing_</small>
